@@ -13,7 +13,9 @@
         onWebViewEvent: function(webViewId, eventName, jsonData){
             // getting webviewInterface object by webViewId from static map.
             var oWebViewInterface = getWebViewIntefaceObjByWebViewId(webViewId);
-            oWebViewInterface._onWebViewEvent(eventName, jsonData);
+            if(oWebViewInterface) {
+                oWebViewInterface._onWebViewEvent(eventName, jsonData);
+            }
         }
     });
     
@@ -73,7 +75,9 @@
      */
     WebViewInterface.prototype._executeJS = function(strJSFunction){
         var url = 'javascript:'+strJSFunction;
-        this.webView.android.loadUrl(url);
+        if(this.webView.android) {
+            this.webView.android.loadUrl(url);
+        }
     };
     
     return WebViewInterface;
